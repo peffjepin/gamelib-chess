@@ -6,7 +6,7 @@ import model
 import scenes
 
 debug = "-d" in sys.argv
-gamelib.init()
+gamelib.init(title="gamelib-chess")
 
 with scenes.LoadingScene() as scene:
     while not scene.done_loading:

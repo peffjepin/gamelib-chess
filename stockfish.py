@@ -1,10 +1,12 @@
 import multiprocessing
 import subprocess
+import os
 import pathlib
 import time
 import model
 
-
+_POSIX = os.name == "posix"
+_FILENAME = "stockfish" if _POSIX else "stockfish.exe"
 CPU_CNT = int(multiprocessing.cpu_count() // 2)
 PROJECT_ROOT = pathlib.Path(__file__).parent
 FILES = "0abcdefgh"
@@ -19,7 +21,7 @@ PIECES = {
 class Stockfish:
     def __init__(self, elo=1000, depth=1):
         self._process = subprocess.Popen(
-            PROJECT_ROOT / "bin" / "stockfish",
+            PROJECT_ROOT / "stockfish" / _FILENAME,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,

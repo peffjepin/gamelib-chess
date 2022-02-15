@@ -420,7 +420,6 @@ class Board:
             move.target_file, promotion_rank, player
         )
         self._board[promotion_rank - 1][move.target_file - 1] = promoted_piece
-        self.prev_promotion = promoted_piece
 
     def _handle_end_state(self) -> None:
         self._handle_drawn_by_repitition()
@@ -434,24 +433,14 @@ class Board:
         self._handle_insufficient_material()
 
     def _handle_checkmate(self):
-        drawn = False
         victim = Player.other(self._turn)
-
-        # might be stalemate
-        if not self.in_check(victim):
-            king = (
-                self._black_king
-                if victim == Player.BLACK
-                else self._white_king
-            )
-            if next(king.possible_moves(self), None):
-                return
-            drawn = True
+        drawn = not self.in_check(victim)
 
         # look for possible moves
         for piece in self:
             if piece.info.player == victim:
                 if next(piece.possible_moves(self), None):
+                    # possible move found, end condition not met.
                     return
 
         # no possible moves found, game must be over
@@ -694,9 +683,7 @@ class King(Piece):
 
 
 def ray_to_file_and_rank(ray: gamelib.geometry.Ray) -> Tuple[int, int]:
-    board_surface = 0
-    dz = ray.origin.z - board_surface
-    t = abs(dz / ray.direction.z)
+    t = abs(ray.origin.z / ray.direction.z)
     on_plane = ray.origin + ray.direction * t
     file = int(math.ceil(on_plane.x - 0.5))
     rank = int(math.ceil(on_plane.y - 0.5))

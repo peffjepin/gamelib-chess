@@ -35,11 +35,12 @@ python3 -m pip install .
 After cloning the repo and installing requirements:
 
 ```sh
-# run the main script
-python3 chess/main.py
-
-# or run the installed entry point
+# console entry point should be available on Linux
 play-chess
+
+# I can't find any documentation about how the console entry points work
+# on windows, but you can just run the main script.
+python3 chess/main.py
 ```
 
 You can launch in debug if you want to move the pieces for both sides to test things out.

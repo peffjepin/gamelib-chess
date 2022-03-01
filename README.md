@@ -1,7 +1,7 @@
 # gamelib-chess
 A chess application written as an example usage for gamelib.
 
-![Screenshot](/assets/app-screenshot.png)
+![Screenshot](chess/assets/app-screenshot.png)
 
 ### Installation
 

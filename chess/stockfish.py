@@ -3,7 +3,8 @@ import subprocess
 import os
 import pathlib
 import time
-import model
+
+from chess import model
 
 _POSIX = os.name == "posix"
 _FILENAME = "stockfish" if _POSIX else "stockfish.exe"

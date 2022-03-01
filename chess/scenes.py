@@ -1,8 +1,10 @@
 import time
 import numpy as np
-import model
-import stockfish
+
 import gamelib
+
+from chess import model
+from chess import stockfish
 
 CLEAR = (0.15, 0.1, 0.10, 0)
 

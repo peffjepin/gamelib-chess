@@ -1,6 +1,8 @@
 import sys
+import pathlib
 
 import gamelib
+from gamelib.core import resources
 
 from chess import model
 from chess import scenes
@@ -8,6 +10,7 @@ from chess import scenes
 
 def main():
     debug = "-d" in sys.argv
+    resources.set_content_roots(pathlib.Path(__file__).parent)
     gamelib.init(title="gamelib-chess")
 
     with scenes.LoadingScene() as scene:
